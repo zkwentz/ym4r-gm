@@ -127,6 +127,33 @@ For example:
 	GMarker.new([12.4,65.6],:info_window => "<b>I'm a Popup window</b>",:title => "Tooltip")
 	GMarker.new(GLatLng.new([12.3,45.6]))
 	GMarker.new("Rue Clovis Paris France", :title => "geocoded")
+
+==GMarkers Advanced
+Getting more advanced with your GMarkers is as easy as a few more steps. This <tt>:icon</tt> parameter accepts a GIcon variable and the <tt>:info_window_tabs</tt> parameter accepts an array of GIconWindowTab variables. 
+
+To declare a new GIcon variable in your controller your code would look similar to the following:
+        @mapper.icon_global_init(GIcon.new(:image => "../images/icon.png",
+           :icon_anchor => GPoint.new(0,0),   
+           :shadow => "../images/shadow.png",
+           :shadow_size => GSize.new(37,32),
+           :info_window_anchor => GPoint.new(9,2)), "new_icon")
+
+        @new_icon = Variable.new("new_icon")
+
+<i>Refer to the Google Maps API for more icon options.</i>
+
+And to declare an array of GInfoWindowTabs your code would look like the following:
+        @tab1 = GInfoWindowTab.new('Tab 1 Label', 'HTML for inside of tab1')
+        @tab2 = GInfoWindowTab.new('Tab 2 Label', 'HTML for inside of tab2')
+
+        @window_tabs = [@tab1, @tab2]
+
+Adding these to your marker is as simple as passing your variables in as parameters. 
+
+For example:
+        GMarker.new(:title => "Tooltip", :icon => @new_icon, :info_window_tabs => @window_tabs)
+
+
 	
 
 ===Update of the map
